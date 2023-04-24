@@ -1,0 +1,13 @@
+name: ed_crystal_coin
+version: 0.1.0
+
+authors:
+  - Eduard Luhtonen <luhtonen@gmail.com>
+
+targets:
+  ed_crystal_coin:
+    main: src/ed_crystal_coin.cr
+
+crystal: 1.8.1
+
+license: MIT
