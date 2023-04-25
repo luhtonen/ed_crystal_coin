@@ -1,15 +1,20 @@
-require "openssl"
+require "./proof_of_work"
 
 class EdCrystalCoin::Block
-  property current_hash : String
-  getter index : Int64
+  include ProofOfWork
+
+  getter current_hash : String
+  getter index : Int32
+  getter nonce : Int32
+  getter previous_hash : String
 
   def initialize(index = 0, data = "data", previous_hash = "hash")
     @data = data
     @index = index
     @timestamp = Time.utc
     @previous_hash = previous_hash
-    @current_hash = hash_block
+    @nonce = proof_of_work
+    @current_hash = calc_hash_with_nonce(@nonce)
   end
 
   def self.first(data="Genesis Block")
@@ -22,11 +27,5 @@ class EdCrystalCoin::Block
       index: previous_block.index + 1,
       previous_hash: previous_block.current_hash
     )
-  end
-
-  private def hash_block
-    hash = OpenSSL::Digest.new("SHA256")
-    hash.update("#{@index}#{@timestamp}#{@data}#{@previous_hash}")
-    hash.hexfinal
   end
 end
