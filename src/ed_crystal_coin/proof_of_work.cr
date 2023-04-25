@@ -4,7 +4,7 @@ module EdCrystalCoin
   module ProofOfWork
 
     private def proof_of_work(difficulty = "00")
-      nonce = 0
+      nonce : Int64 = 0
       loop do
         hash = calc_hash_with_nonce(nonce)
         if hash[0..1] == difficulty

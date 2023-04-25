@@ -4,8 +4,8 @@ class EdCrystalCoin::Block
   include ProofOfWork
 
   getter current_hash : String
-  getter index : Int32
-  getter nonce : Int32
+  getter index : Int64
+  getter nonce : Int64
   getter previous_hash : String
 
   def initialize(index = 0, transactions = [] of Transaction, previous_hash = "hash")
