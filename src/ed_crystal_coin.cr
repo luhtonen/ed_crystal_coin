@@ -12,5 +12,5 @@ module EdCrystalCoin
     previous_block = new_block
   end
 
-  p blockchain
+#  p blockchain
 end
