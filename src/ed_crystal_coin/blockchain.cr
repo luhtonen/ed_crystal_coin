@@ -11,6 +11,6 @@ class EdCrystalCoin::Blockchain
   end
 
   def add_transaction(transaction)
-    @uncommitted_transaction << transaction
+    @uncommitted_transactions << transaction
   end
 end
