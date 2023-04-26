@@ -1,7 +1,12 @@
+require "json"
 require "./block"
 require "./transaction"
 
 class EdCrystalCoin::Blockchain
+  include JSON::Serializable
+
+  BLOCK_SIZE = 25
+
   getter chain
   getter uncommitted_transactions
 
@@ -12,5 +17,16 @@ class EdCrystalCoin::Blockchain
 
   def add_transaction(transaction)
     @uncommitted_transactions << transaction
+  end
+
+  def mine
+    raise "No transactions to be mined" if @uncommitted_transactions.empty?
+
+    new_block = Block.next(
+      previous_block: @chain.last,
+      transactions: @uncommitted_transactions.shift(BLOCK_SIZE)
+    )
+
+    @chain << new_block
   end
 end

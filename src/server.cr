@@ -10,15 +10,16 @@ node_identifier = UUID.random.to_s
 blockchain = EdCrystalCoin::Blockchain.new
 
 get "/chain" do
-  "Send the blockchain as json objects"
+  { chain: blockchain.chain }.to_json
 end
 
 get "/mine" do
-  "We'll mine a new Block"
+  blockchain.mine
+  "Block with index=#{blockchain.chain.last.index} is mined."
 end
 
 get "/pending" do
-  { transactions: "#{blockchain.uncommitted_transactions}" }.to_json
+  { transactions: blockchain.uncommitted_transactions }.to_json
 end
 
 post "/transactions/new" do |env|
@@ -29,7 +30,6 @@ post "/transactions/new" do |env|
   )
 
   blockchain.add_transaction(transaction)
-  puts transaction
 
   "Transaction #{transaction} has been added to the node"
 end
