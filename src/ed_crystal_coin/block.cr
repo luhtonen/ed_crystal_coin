@@ -1,7 +1,9 @@
+require "json"
 require "./proof_of_work"
 
 class EdCrystalCoin::Block
   include ProofOfWork
+  include JSON::Serializable
 
   getter current_hash : String
   getter index : Int64
