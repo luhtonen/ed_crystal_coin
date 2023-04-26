@@ -1,18 +1,22 @@
 require "json"
 require "./block"
 require "./transaction"
+require "./consensus"
 
 class EdCrystalCoin::Blockchain
   include JSON::Serializable
+  include Consensus
 
   BLOCK_SIZE = 25
 
   getter chain
   getter uncommitted_transactions
+  getter nodes
 
   def initialize
     @chain = [ Block.first ]
     @uncommitted_transactions = [] of Block::Transaction
+    @nodes = Set(String).new [] of String
   end
 
   def add_transaction(transaction)

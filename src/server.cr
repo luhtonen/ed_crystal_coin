@@ -34,4 +34,16 @@ post "/transactions/new" do |env|
   "Transaction #{transaction} has been added to the node"
 end
 
+post "/nodes/register" do |env|
+  nodes = env.params.json["nodes"].as(Array)
+
+  raise "Empty array" if nodes.empty?
+
+  nodes.each do |node|
+    blockchain.register_node(node.to_s)
+  end
+
+  "New nodes have been added: #{blockchain.nodes}"
+end
+
 Kemal.run
