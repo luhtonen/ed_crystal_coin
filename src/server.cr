@@ -46,4 +46,12 @@ post "/nodes/register" do |env|
   "New nodes have been added: #{blockchain.nodes}"
 end
 
+get "/nodes/resolve" do
+  if blockchain.resolve
+    "Successfully updated the chain"
+  else
+    "Current chain is up-to-date"
+  end
+end
+
 Kemal.run

@@ -30,4 +30,9 @@ class EdCrystalCoin::Block
       previous_hash: previous_block.current_hash
     )
   end
+
+  def recalculate_hash
+    @nonce = proof_of_work
+    @current_hash = calc_hash_with_nonce(@nonce)
+  end
 end
