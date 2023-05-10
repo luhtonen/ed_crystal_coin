@@ -19,4 +19,4 @@ TODO: Write development instructions here
 
 ## Contributors
 
-- [Eduard Luhtonen](https://github.com/your-github-user) - creator and maintainer
+- [Eduard Luhtonen](https://github.com/luhtonen) - creator and maintainer
